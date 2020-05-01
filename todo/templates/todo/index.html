@@ -1,0 +1,41 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Todo List</h1>
+    <div>
+        <form method="POST">
+            {% csrf_token %}
+            {% for title in form %}
+                <div class="d-flex mx-auto w-25">
+                    {{ title }}
+                    <button type="submit" class="btn btn-primary ml-2">Submit</button>
+                </div>
+
+            {% endfor %}
+        </form>
+    </div>
+    <div>
+        {% for todo in todo_list %}
+        <div class="card w-25 mx-auto">
+            <div class="card-body">
+                <a href="{% url 'deleteItem' todo.pk %}" type="button" class="close" aria-label="Close">
+                    <span aria-hidden="true">&times</span>
+                </a>
+                <p class="text-center">{{ todo.title }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+</body>
+
+</html>
